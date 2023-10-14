@@ -1,0 +1,68 @@
+#TODO: SET WORKING DIRECTORY TO SOURCE FILE LOCATION (via menu entry Session -> Set working directory)
+##Task 1
+#load foreign library to import .arff files from WEKA
+#load library FSelector for information gain
+#load library caret for downsampling
+library("foreign")
+library("FSelector")
+library("caret")
+#load functions
+source("Exercise_5_Functions.R")
+
+#load data
+dataset <- read.arff("Datasets/diabetes.arff")
+
+#downsample data and remove added column
+dataset <- downSample(dataset, dataset$class)
+dataset$Class <- NULL
+#shuffle data
+dataset <- dataset[sample(nrow(dataset)),]
+
+#set classindex, labels and datamatrix
+classindex <- ncol(dataset) #last column is class column
+y <- dataset[,classindex]
+x <- as.matrix(dataset[,-classindex])
+#scale matrix
+x <-scale(x, center = TRUE, scale = TRUE)
+
+
+#set training and test data (50%/50%)
+x.train <- TODO
+y.train <- TODO
+x.test <- TODO
+y.test <- TODO
+
+#get the predictions, should return classlabels.test.predicted
+y.predict <- knnPredictions(x.train, x.test, y.train)
+
+#calculate the accuracy
+conf.mat <- table(y.predict , y.test)
+accuracy <- acc(conf.mat)
+
+
+#Task 3
+#classify using caret library
+#install.packages("caret")
+#install.packages("e1071")
+#install.packages("kernlab")
+#install.packages("stepPlr")
+
+
+classindex <- ncol(dataset)
+y <- dataset[,classindex]
+x <- as.matrix(dataset[,-classindex])
+
+##feature selection 
+x.fs <- featureSelectionIG(x,y, threshold=0.05)
+
+##classification
+#support vector machine
+set.seed(123)
+svm  <-  train(x,  y, method  =  "svmLinear", tuneLength=3, trControl  =  trainControl(method  =  "cv", number  =  10), preProcess  =  c("center",  "scale")) 
+print(svm)
+
+#ANN
+ann  <-  train(x.fs,  y, method  =  "nnet", tuneLength=3, trControl  =  trainControl(method  =  "cv", number  =  10), preProcess  =  c("center",  "scale")) 
+print(ann)
+
+

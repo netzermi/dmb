@@ -1,0 +1,28 @@
+---
+title: "Exercise 4"
+output: html_notebook
+---
+```{r,echo=FALSE,warning=FALSE}
+source("Functions.R")
+```
+
+
+# Task 1
+Loading ARFF dataset diabetes (in directory data).
+Checking the class distribution and using down-sampling.
+
+```{r}
+#TODO
+```
+
+# Task 2
+Splitting the dataset and perform scaling.
+```{r}
+#TODO
+```
+
+# Task 3 and 4
+Classification and model evaluation.
+```{r}
+#TODO
+```
