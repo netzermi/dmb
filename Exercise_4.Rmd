@@ -6,7 +6,6 @@ output: html_notebook
 source("Functions.R")
 ```
 
-
 # Task 1
 Loading ARFF dataset diabetes (in directory data).
 Checking the class distribution and using down-sampling.
@@ -26,3 +25,10 @@ Classification and model evaluation.
 ```{r}
 #TODO
 ```
+
+# Task 5
+Use KNN classifier of the caret package. 
+```{r}
+#TODO
+```
+

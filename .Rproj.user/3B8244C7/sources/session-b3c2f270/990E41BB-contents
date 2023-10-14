@@ -1,6 +1,0 @@
-x <- iris[,-5]
-mins <- apply(x, 2, min)
-
-for(i in 1:ncol(x)){
-  x[,i] <- x[,i] - mins[i]
-}
