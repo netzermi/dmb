@@ -1,6 +1,18 @@
 require("foreign")
 require("caret")
 
+#Perform a z-transformation on dataset x with given column means and column
+#standard deviations. 
+doScale <- function(x, colmeans, colsds){
+  if(ncol(x)!= length(colmeans) & ncol(x) != length(colsds)){
+    stop("Number of columns and length of mean and sd vector must be equal")
+  }
+  for(i in 1:ncol(x)){
+    x[,i] <- (x[,i] - colmeans[i])/colsds[i]
+  }
+  return(x)
+}
+
 #Predict the labels for a given test set (x.test) based on training data (x.train) 
 #and the corresponding training labels (y.train)
 knnPredictions <- function(x.train, x.test, y.train){

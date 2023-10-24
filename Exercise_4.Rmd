@@ -15,7 +15,7 @@ Checking the class distribution and using down-sampling.
 ```
 
 # Task 2
-Splitting the dataset and perform scaling.
+Splitting the dataset and perform scaling using function doScale.
 ```{r}
 #TODO
 ```
