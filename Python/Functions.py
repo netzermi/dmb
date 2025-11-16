@@ -1,3 +1,4 @@
+from math import nan
 import numpy as np
 
 
@@ -32,28 +33,6 @@ def do_scale(x, colmeans, colsds):
 
     # vectorized scaling using broadcasting
     return (x - colmeans) / colsds
-
-
-# Calculates the euclidean distance between two instances/objects.
-def euclid_dist(o1, o2):
-    """
-    Calculate Euclidean distance between two 1-D arrays.
-
-    Parameters
-    ----------
-    o1, o2 : array-like
-        Input vectors of the same length.
-
-    Returns
-    -------
-    float
-        Euclidean distance.
-    """
-    o1 = np.asarray(o1, dtype=float)
-    o2 = np.asarray(o2, dtype=float)
-    if o1.shape != o2.shape:
-        raise ValueError("Objects must have the same shape")
-    return float(np.linalg.norm(o1 - o2))
 
 
 # Predict the labels for a given test set (x_test) based on training data (x_train)
@@ -93,10 +72,9 @@ def knn_predictions(x_train, x_test, y_train):
 
     for i in range(ntest):
         tmp = x_test[i]
-        # vectorized distance computation to all training points
-        dists = np.linalg.norm(x_train - tmp, axis=1)
-        min_idx = int(np.argmin(dists))
-        y_pred[i] = y_train[min_idx]
+        #TODO: Compute distances between tmp and all x_train rows. 
+        # Find index of nearest neighbour and assign label to y_pred[i].
+
 
     return y_pred
 
@@ -122,4 +100,5 @@ def acc(y_predict, y_test):
     y_test = np.asarray(y_test)
     if y_predict.shape != y_test.shape:
         raise ValueError("`y_predict` and `y_test` must have the same shape")
-    return float(np.mean(y_predict == y_test))
+    accuracy = 0 #TODO: Calculate accuracy
+    return accuracy
